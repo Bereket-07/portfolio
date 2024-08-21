@@ -1616,7 +1616,9 @@ body.show-chatbot .chatbot {
 header h2 {
   font-size: 1.4rem;
 }
-
+.chatbox{
+  margin-bottom: 50px;
+}
 .chatbot .chatbox {
   overflow-y: auto;
   height: 400px; /* Adjust height as needed */

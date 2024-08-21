@@ -1,4 +1,3 @@
-
 console.log("Script Loaded");
 
 const closeBtn = document.querySelector(".close-btn");
@@ -10,6 +9,11 @@ let userMessage = null; // Variable to store user's message
 
 // API configuration
 const SERVER_URL = "https://personal-assistant-backend-2.onrender.com/assistant"; // Your deployed server URL here
+
+// Function to generate a unique ID
+const generateUniqueId = () => {
+  return '_' + Math.random().toString(36).substr(2, 9);
+};
 
 // Create a chat <li> element with passed message and className
 const createChatLi = (message, className) => {
@@ -38,6 +42,9 @@ const scrollToBottom = () => {
   chatbox.scrollTop = chatbox.scrollHeight;
 };
 
+const sessionId = localStorage.getItem('session_id') || generateUniqueId();
+localStorage.setItem('session_id', sessionId);
+
 const generateResponse = async (chatElement) => {
   const messageElement = chatElement.querySelector("p");
 
@@ -47,10 +54,11 @@ const generateResponse = async (chatElement) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       message: userMessage,
-      language:"English"
+      language:"English",
+      sessionId: sessionId
     }),
   };
-
+  console.log(sessionId)
   try {
     const response = await fetch(SERVER_URL, requestOptions);
     const data = await response.json();
@@ -74,6 +82,8 @@ const toggleChatbot = () => {
     console.log("Chatbot is now hidden");
   }
 };
+
+// Function to handle clicks outside the chatbot container
 
 const handleChat = (event) => {
   if (event.key === "Enter" && !event.shiftKey) {

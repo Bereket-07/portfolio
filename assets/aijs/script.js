@@ -8,7 +8,7 @@ const sendChatBtn = document.querySelector(".chat-input span");
 let userMessage = null; // Variable to store user's message
 
 // API configuration
-const SERVER_URL = "https://personal-assistant-backend.onrender.com/assistnat"; // Your deployed server URL here
+const SERVER_URL = "https://personal-assistant-backend.onrender.com/assistant"; // Your deployed server URL here
 
 // Function to generate a unique ID
 const generateUniqueId = () => {
